@@ -1,4 +1,3 @@
-
 // ImageTool.h : ImageTool 응용 프로그램에 대한 주 헤더 파일
 //
 #pragma once
@@ -14,27 +13,32 @@
 // 이 클래스의 구현에 대해서는 ImageTool.cpp을 참조하십시오.
 //
 
-class CImageToolApp : public CWinAppEx
+class CDib;
+class CImageToolApp : public CWinApp
 {
 public:
 	CImageToolApp();
+	~CImageToolApp();
 
+public:
+	CDib* m_pNewDib;
 
 // 재정의입니다.
 public:
 	virtual BOOL InitInstance();
-	virtual int ExitInstance();
 
 // 구현입니다.
-	UINT  m_nAppLook;
-	BOOL  m_bHiColorIcons;
-
-	virtual void PreLoadState();
-	virtual void LoadCustomState();
-	virtual void SaveCustomState();
-
-	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+
+public:
+	afx_msg void OnAppAbout();
+	afx_msg void OnEditPaste();
+	afx_msg void OnUpdateEditPaste(CCmdUI *pCmdUI);
 };
 
 extern CImageToolApp theApp;
+
+// 전역 함수 선언
+
+void AfxNewImage(CDib& dib);
+

@@ -1,7 +1,5 @@
-
 // ChildFrm.cpp : CChildFrame 클래스의 구현
 //
-
 #include "stdafx.h"
 #include "ImageTool.h"
 
@@ -11,12 +9,14 @@
 #define new DEBUG_NEW
 #endif
 
+
 // CChildFrame
 
-IMPLEMENT_DYNCREATE(CChildFrame, CMDIChildWndEx)
+IMPLEMENT_DYNCREATE(CChildFrame, CMDIChildWnd)
 
-BEGIN_MESSAGE_MAP(CChildFrame, CMDIChildWndEx)
+BEGIN_MESSAGE_MAP(CChildFrame, CMDIChildWnd)
 END_MESSAGE_MAP()
+
 
 // CChildFrame 생성/소멸
 
@@ -33,24 +33,27 @@ CChildFrame::~CChildFrame()
 BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: CREATESTRUCT cs를 수정하여 여기에서 Window 클래스 또는 스타일을 수정합니다.
-	if( !CMDIChildWndEx::PreCreateWindow(cs) )
+	if( !CMDIChildWnd::PreCreateWindow(cs) )
 		return FALSE;
 
 	return TRUE;
 }
+
 
 // CChildFrame 진단
 
 #ifdef _DEBUG
 void CChildFrame::AssertValid() const
 {
-	CMDIChildWndEx::AssertValid();
+	CMDIChildWnd::AssertValid();
 }
 
 void CChildFrame::Dump(CDumpContext& dc) const
 {
-	CMDIChildWndEx::Dump(dc);
+	CMDIChildWnd::Dump(dc);
 }
+
 #endif //_DEBUG
+
 
 // CChildFrame 메시지 처리기

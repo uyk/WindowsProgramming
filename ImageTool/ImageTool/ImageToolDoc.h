@@ -1,10 +1,10 @@
-
 // ImageToolDoc.h : CImageToolDoc 클래스의 인터페이스
 //
 
 
 #pragma once
 
+#include "dib.h"
 
 class CImageToolDoc : public CDocument
 {
@@ -22,10 +22,6 @@ public:
 public:
 	virtual BOOL OnNewDocument();
 	virtual void Serialize(CArchive& ar);
-#ifdef SHARED_HANDLERS
-	virtual void InitializeSearchContent();
-	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);
-#endif // SHARED_HANDLERS
 
 // 구현입니다.
 public:
@@ -41,8 +37,16 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 
-#ifdef SHARED_HANDLERS
-	// 검색 처리기에 대한 검색 콘텐츠를 설정하는 도우미 함수
-	void SetSearchContent(const CString& value);
-#endif // SHARED_HANDLERS
+public:
+	// 이미지 객체
+	CDib m_Dib;
+
+	// 파일 불러오기 & 저장하기
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
+	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);
+
+public:
+	afx_msg void OnWindowDuplicate();
+	afx_msg void OnEditCopy();
+	afx_msg void OnImageBrightness();
 };

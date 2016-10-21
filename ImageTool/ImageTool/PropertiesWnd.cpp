@@ -17,7 +17,6 @@ static char THIS_FILE[]=__FILE__;
 
 CPropertiesWnd::CPropertiesWnd()
 {
-	m_nComboHeight = 0;
 }
 
 CPropertiesWnd::~CPropertiesWnd()
@@ -44,19 +43,22 @@ END_MESSAGE_MAP()
 
 void CPropertiesWnd::AdjustLayout()
 {
-	if (GetSafeHwnd () == NULL || (AfxGetMainWnd() != NULL && AfxGetMainWnd()->IsIconic()))
+	if (GetSafeHwnd() == NULL)
 	{
 		return;
 	}
 
-	CRect rectClient;
+	CRect rectClient,rectCombo;
 	GetClientRect(rectClient);
 
+	m_wndObjectCombo.GetWindowRect(&rectCombo);
+
+	int cyCmb = rectCombo.Size().cy;
 	int cyTlb = m_wndToolBar.CalcFixedLayout(FALSE, TRUE).cy;
 
-	m_wndObjectCombo.SetWindowPos(NULL, rectClient.left, rectClient.top, rectClient.Width(), m_nComboHeight, SWP_NOACTIVATE | SWP_NOZORDER);
-	m_wndToolBar.SetWindowPos(NULL, rectClient.left, rectClient.top + m_nComboHeight, rectClient.Width(), cyTlb, SWP_NOACTIVATE | SWP_NOZORDER);
-	m_wndPropList.SetWindowPos(NULL, rectClient.left, rectClient.top + m_nComboHeight + cyTlb, rectClient.Width(), rectClient.Height() -(m_nComboHeight+cyTlb), SWP_NOACTIVATE | SWP_NOZORDER);
+	m_wndObjectCombo.SetWindowPos(NULL, rectClient.left, rectClient.top, rectClient.Width(), 200, SWP_NOACTIVATE | SWP_NOZORDER);
+	m_wndToolBar.SetWindowPos(NULL, rectClient.left, rectClient.top + cyCmb, rectClient.Width(), cyTlb, SWP_NOACTIVATE | SWP_NOZORDER);
+	m_wndPropList.SetWindowPos(NULL, rectClient.left, rectClient.top + cyCmb + cyTlb, rectClient.Width(), rectClient.Height() -(cyCmb+cyTlb), SWP_NOACTIVATE | SWP_NOZORDER);
 }
 
 int CPropertiesWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -79,11 +81,6 @@ int CPropertiesWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_wndObjectCombo.AddString(_T("응용 프로그램"));
 	m_wndObjectCombo.AddString(_T("속성 창"));
 	m_wndObjectCombo.SetCurSel(0);
-
-	CRect rectCombo;
-	m_wndObjectCombo.GetClientRect (&rectCombo);
-
-	m_nComboHeight = rectCombo.Height();
 
 	if (!m_wndPropList.Create(WS_VISIBLE | WS_CHILD, rectDummy, this, 2))
 	{
@@ -197,7 +194,7 @@ void CPropertiesWnd::InitPropList()
 	CFont* font = CFont::FromHandle((HFONT) GetStockObject(DEFAULT_GUI_FONT));
 	font->GetLogFont(&lf);
 
-	_tcscpy_s(lf.lfFaceName, _T("맑은 고딕"));
+	lstrcpy(lf.lfFaceName, _T("맑은 고딕"));
 
 	pGroup2->AddSubItem(new CMFCPropertyGridFontProperty(_T("글꼴"), lf, CF_EFFECTS | CF_SCREENFONTS, _T("창의 기본 글꼴을 지정합니다.")));
 	pGroup2->AddSubItem(new CMFCPropertyGridProperty(_T("시스템 글꼴을 사용합니다."), (_variant_t) true, _T("창에서 MS Shell Dlg 글꼴을 사용하도록 지정합니다.")));

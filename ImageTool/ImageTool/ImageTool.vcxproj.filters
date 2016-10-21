@@ -7,68 +7,27 @@
     </Filter>
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ImageTool.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MainFrm.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ChildFrm.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageToolDoc.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageToolView.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="FileView.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassView.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewTree.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="OutputWnd.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PropertiesWnd.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ImageTool.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MainFrm.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ChildFrm.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Dib.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DibBmp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FileNewDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTool.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ImageToolDoc.cpp">
@@ -77,13 +36,22 @@
     <ClCompile Include="ImageToolView.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBBYTE.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DibEnhancement.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BrightnessDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="FileView.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ClassView.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewTree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="OutputWnd.cpp">
@@ -92,10 +60,80 @@
     <ClCompile Include="PropertiesWnd.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ViewTree.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ImageTool.reg" />
+    <ClInclude Include="ChildFrm.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Dib.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FileNewDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageTool.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageToolDoc.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageToolView.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBBYTE.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DibEnhancement.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightnessDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FileView.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputWnd.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesWnd.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewTree.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ImageTool.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
     <None Include="res\ImageTool.rc2">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\ImageToolDoc.ico">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="ImageTool.reg" />
+    <None Include="ReadMe.txt" />
+    <None Include="UpgradeLog.XML" />
+    <None Include="UserImages.bmp">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
@@ -103,82 +141,5 @@
     <ResourceCompile Include="ImageTool.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\file_view.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\file_view_hc.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\class_view.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\class_view_hc.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\fileview.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\fileview_hc.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\classview.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\classview_hc.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\explorer.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\explorer_hc.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\sort.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\sort_hc.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\menuimages.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\menuimages_hc.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\output_wnd.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\output_wnd_hc.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\properties_wnd.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\properties_wnd_hc.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\properties.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\properties_hc.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="UserImages.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\ImageToolDoc.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\ImageTool.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\Toolbar.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\Toolbar256.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
   </ItemGroup>
 </Project>

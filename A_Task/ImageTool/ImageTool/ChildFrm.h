@@ -1,10 +1,11 @@
-
 // ChildFrm.h : CChildFrame 클래스의 인터페이스
 //
 
+
 #pragma once
 
-class CChildFrame : public CMDIChildWndEx
+
+class CChildFrame : public CMDIChildWnd
 {
 	DECLARE_DYNCREATE(CChildFrame)
 public:

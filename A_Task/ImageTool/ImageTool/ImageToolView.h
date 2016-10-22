@@ -1,6 +1,6 @@
-
 // ImageToolView.h : CImageToolView 클래스의 인터페이스
 //
+
 
 #pragma once
 
@@ -22,6 +22,7 @@ public:
 public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
 protected:
 	virtual void OnInitialUpdate(); // 생성 후 처음 호출되었습니다.
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
@@ -40,12 +41,28 @@ protected:
 
 // 생성된 메시지 맵 함수
 protected:
-	afx_msg void OnFilePrintPreview();
-	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
 public:
+	// 이미지 확대 배율
+	int m_nZoom;
+
+protected:
+	void SetScrollSizeToFit(void);
+	void ShowImageInfo(CPoint point);
+
+public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+
+	afx_msg void OnViewZoom1();
+	afx_msg void OnViewZoom2();
+	afx_msg void OnViewZoom3();
+	afx_msg void OnViewZoom4();
+
+	afx_msg void OnUpdateViewZoom1(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateViewZoom2(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateViewZoom3(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateViewZoom4(CCmdUI *pCmdUI);
 };
 
 #ifndef _DEBUG  // ImageToolView.cpp의 디버그 버전

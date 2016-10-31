@@ -11,6 +11,7 @@
 #include "ChildFrm.h"
 #include "ImageToolDoc.h"
 #include "ImageToolView.h"
+#include "./IppImage/IppDib.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -226,5 +227,7 @@ void CImageToolApp::SaveCustomState()
 
 // CImageToolApp 메시지 처리기
 
-
-
+void AfxNewBitmap(IppDib& dib) {
+	theApp.m_pNewDib = &dib;
+	AfxGetMainWnd()->SendMessage(WM_COMMAND, ID_FILE_NEW);
+}

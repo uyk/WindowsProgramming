@@ -10,8 +10,13 @@
 #endif
 
 #include "ImageToolDoc.h"
-#include "FileViewDlg.h"
 
+#include "IppImage\IppImage.h"
+#include "IppImage\IppConvert.h"
+#include "IppImage\IppEnhance.h"
+#include "BrightnessContrastDlg.h"
+
+#include "FileViewDlg.h"
 
 #include <propkey.h>
 
@@ -19,12 +24,22 @@
 #define new DEBUG_NEW
 #endif
 
+#define CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img) \
+	IppByteImage img; \
+	IppDibToImage(m_Dib, img);
+
+#define CONVERT_IMAGE_TO_DIB(img, dib) \
+	IppDib dib; \
+	IppImageToDib(img, dib);
 
 // CImageToolDoc
 
 IMPLEMENT_DYNCREATE(CImageToolDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CImageToolDoc, CDocument)
+	ON_COMMAND(ID_WINDOW_DUPLICATE, &CImageToolDoc::OnWindowDuplicate)
+	ON_COMMAND(ID_IMAGE_INVERSE, &CImageToolDoc::OnImageInverse)
+	ON_COMMAND(ID_BRIGHTNESS_CONTRAST, &CImageToolDoc::OnBrightnessContrast)
 END_MESSAGE_MAP()
 
 
@@ -48,16 +63,23 @@ BOOL CImageToolDoc::OnNewDocument()
 	// TODO: 여기에 재초기화 코드를 추가합니다.
 	// SDI 문서는 이 문서를 다시 사용합니다.
 	BOOL ret = TRUE;
-	CFileViewDlg dlg;
 
-	if(dlg.DoModal() == IDOK) {
-		if(dlg.m_nType == 0) 
-			ret = m_Dib.CreateGrayBitmap(dlg.m_nWidth, dlg.m_nHeight);
+	if(theApp.m_pNewDib == NULL) {
+		CFileViewDlg dlg;
+
+		if(dlg.DoModal() == IDOK) {
+			if(dlg.m_nType == 0) 
+				ret = m_Dib.CreateGrayBitmap(dlg.m_nWidth, dlg.m_nHeight);
+			else 
+				ret = m_Dib.CreateRgbBitmap(dlg.m_nWidth, dlg.m_nHeight);
+		}
 		else 
-			ret = m_Dib.CreateRgbBitmap(dlg.m_nWidth, dlg.m_nHeight);
+			ret = FALSE;
 	}
-	else 
-		ret = FALSE;
+	else {
+		m_Dib = *(theApp.m_pNewDib);
+		theApp.m_pNewDib = NULL;
+	}
 	return ret;
 }
 
@@ -166,4 +188,41 @@ BOOL CImageToolDoc::OnSaveDocument(LPCTSTR lpszPathName)
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 
 	return m_Dib.Save(CT2A(lpszPathName));
+}
+
+
+void CImageToolDoc::OnWindowDuplicate()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	AfxNewBitmap(m_Dib);
+}
+
+
+void CImageToolDoc::OnImageInverse()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img)
+	IppInverse(img);
+	CONVERT_IMAGE_TO_DIB(img, dib)
+
+	//AfxPrintInfo(_T("[반전] 입력 영상: %s"), GetTitle());
+	AfxNewBitmap(dib);
+}
+
+
+void CImageToolDoc::OnBrightnessContrast()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CBrightnessContrastDlg dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img)
+		IppBrightness(img, dlg.m_Brightness);
+		IppContrast(img, dlg.m_nContrast);
+		CONVERT_IMAGE_TO_DIB(img, dib)
+
+		//AfxPrintInfo(_T("[밝기/명암비 조절] 입력 영상: %s, 밝기: %d, 명암비: %d%%"), 
+		//	GetTitle(), dlg.m_nBrightness, dlg.m_nContrast);
+		AfxNewBitmap(dib);
+	}
 }

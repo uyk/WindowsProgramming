@@ -1,0 +1,7 @@
+1. Implement Algorithm
+2. Design Dialog Box
+	- Add a D/B
+	- Design controls
+	- Add a class and menber values
+	- Initialize control values
+	- Event handling

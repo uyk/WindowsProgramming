@@ -1,0 +1,44 @@
+childVew에 
+
+
+단일문서 mfc 표준
+윈도우아키텍쳐체크해제
+
+클래식어쩌구
+왼쪽에서 뭐 해제
+고급기능해제
+public :
+CArray<TCHAR, TCHAR>m_str;
+
+
+void CChildView::OnPaint() 
+{
+	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
+	
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	
+	// 그리기 메시지에 대해서는 CWnd::OnPaint()를 호출하지 마십시오.
+	CFont font;
+	font.CreatePointFont(150,_T("궁서"));
+	dc.SelectObject(&font);
+
+	CRect rect;
+	GetClientRect(&rect);
+	dc.DrawText(m_str.GetData(), m_str.GetSize(), &rect, DT_LEFT);
+}
+void CChildView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	if(nChar == _T('\b')) {	//백스페이스
+		if(m_str.GetSize() > 0 )
+			m_str.RemoveAt(m_str.GetSize() - 1);	//맨 마지막 위치로 가서 제거
+	
+	}
+	else { m_str.Add(nChar); }
+	Invalidate();
+}
+
+
+오른쪽클릭하면 Test에 있는 메뉴가 떠야함.
+
+//////////과제
+오른쪽 클릭하여 뜨는 메뉴 하나씩 클릭하면 메모장 글씨가 빨 파 등으로 바뀜

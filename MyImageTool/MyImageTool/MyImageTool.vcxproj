@@ -106,6 +106,7 @@
     <None Include="UserImages.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddNoiseDlg.h" />
     <ClInclude Include="ArithmeticLogicalDlg.h" />
     <ClInclude Include="BrightnessContrastDlg.h" />
     <ClInclude Include="ChildFrm.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="IppImage\IppConvert.h" />
     <ClInclude Include="IppImage\IppDib.h" />
     <ClInclude Include="IppImage\IppEnhance.h" />
+    <ClInclude Include="IppImage\IppFilter.h" />
     <ClInclude Include="IppImage\IppImage.h" />
     <ClInclude Include="IppImage\RGBBYTE.h" />
     <ClInclude Include="IppImage\stdafx.h" />
@@ -127,6 +129,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddNoiseDlg.cpp" />
     <ClCompile Include="ArithmeticLogicalDlg.cpp" />
     <ClCompile Include="BrightnessContrastDlg.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
@@ -135,6 +138,7 @@
     <ClCompile Include="IppImage\IppConvert.cpp" />
     <ClCompile Include="IppImage\IppDib.cpp" />
     <ClCompile Include="IppImage\IppEnhance.cpp" />
+    <ClCompile Include="IppImage\IppFilter.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MyImageTool.cpp" />
     <ClCompile Include="MyImageToolDoc.cpp" />

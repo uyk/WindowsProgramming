@@ -11,12 +11,17 @@
 
 #include "MyImageToolDoc.h"
 #include "FileNewDlg.h"
+
 #include "IppImage\IppImage.h"
 #include "IppImage\IppConvert.h"
 #include "IppImage\IppEnhance.h"
+#include "IppImage\IppFilter.h"
+
 #include "BrightnessContrastDlg.h"
 #include "HistogramDlg.h"
 #include "ArithmeticLogicalDlg.h"
+
+#include "AddNoiseDlg.h"
 
 #include <propkey.h>
 
@@ -44,6 +49,7 @@ BEGIN_MESSAGE_MAP(CMyImageToolDoc, CDocument)
 	ON_COMMAND(ID_HISTO_STRETCHING, &CMyImageToolDoc::OnHistoStretching)
 	ON_COMMAND(ID_HISTO_EQUALIZATION, &CMyImageToolDoc::OnHistoEqualization)
 	ON_COMMAND(ID_ARITHMETIC_LOGICAL, &CMyImageToolDoc::OnArithmeticLogical)
+	ON_COMMAND(ID_ADD_NOISE, &CMyImageToolDoc::OnAddNoise)
 END_MESSAGE_MAP()
 
 
@@ -296,5 +302,28 @@ void CMyImageToolDoc::OnArithmeticLogical()
 		}
 		else
 			AfxMessageBox(_T("영상의 크기가 다릅니다!"));
+	}
+}
+
+
+void CMyImageToolDoc::OnAddNoise()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+
+	CAddNoiseDlg dlg;
+	if( dlg.DoModal() == IDOK )
+	{
+		CONVERT_DIB_TO_BYTEIMAGE(m_Dib, imgSrc)
+		IppByteImage imgDst;
+
+		if( dlg.m_nNoiseType == 0 )
+			IppNoiseGaussian(imgSrc, imgDst, dlg.m_nAmount);
+		else
+			IppNoiseSaltNPepper(imgSrc, imgDst, dlg.m_nAmount);
+
+		CONVERT_IMAGE_TO_DIB(imgDst, dib)
+
+		TCHAR* noise[] = { _T("가우시안"), _T("소금&후추") };
+		AfxNewBitmap(dib);
 	}
 }

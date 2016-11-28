@@ -23,6 +23,11 @@
 
 #include "AddNoiseDlg.h"
 
+#include "IppImage\IppGeometry.h"
+#include "TranslateDlg.h"
+#include "ResizeDlg.h"
+#include "RotateDlg.h"
+
 #include <propkey.h>
 
 #define CONVERT_DIB_TO_BYTEIMAGE(m_Dib, img) \
@@ -50,6 +55,11 @@ BEGIN_MESSAGE_MAP(CMyImageToolDoc, CDocument)
 	ON_COMMAND(ID_HISTO_EQUALIZATION, &CMyImageToolDoc::OnHistoEqualization)
 	ON_COMMAND(ID_ARITHMETIC_LOGICAL, &CMyImageToolDoc::OnArithmeticLogical)
 	ON_COMMAND(ID_ADD_NOISE, &CMyImageToolDoc::OnAddNoise)
+	ON_COMMAND(ID_IMAGE_TRANSLATE, &CMyImageToolDoc::OnImageTranslate)
+	ON_COMMAND(ID_IMAGE_RESIZE, &CMyImageToolDoc::OnImageResize)
+	ON_COMMAND(ID_IMAGE_ROTATE, &CMyImageToolDoc::OnImageRotate)
+	ON_COMMAND(ID_IMAGE_MIRROR, &CMyImageToolDoc::OnImageMirror)
+	ON_COMMAND(ID_IMAGE_FLIP, &CMyImageToolDoc::OnImageFlip)
 END_MESSAGE_MAP()
 
 
@@ -326,4 +336,93 @@ void CMyImageToolDoc::OnAddNoise()
 		TCHAR* noise[] = { _T("가우시안"), _T("소금&후추") };
 		AfxNewBitmap(dib);
 	}
+}
+
+
+void CMyImageToolDoc::OnImageTranslate()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CTranslateDlg dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		CONVERT_DIB_TO_BYTEIMAGE(m_Dib, imgSrc)
+		IppByteImage imgDst;
+		IppTranslate(imgSrc, imgDst, dlg.m_nNewSX, dlg.m_nNewSY);
+		CONVERT_IMAGE_TO_DIB(imgDst, dib)
+
+		AfxNewBitmap(dib);
+	}
+}
+
+
+void CMyImageToolDoc::OnImageResize()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CResizeDlg dlg;
+	dlg.m_nOldWidth = m_Dib.GetWidth();
+	dlg.m_nOldHieght = m_Dib.GetHeight();
+	if (dlg.DoModal() == IDOK)
+	{
+		CONVERT_DIB_TO_BYTEIMAGE(m_Dib, imgSrc)
+		IppByteImage imgDst;
+		switch (dlg.m_nInterpolation)
+		{
+		case 0: IppResizeNearest(imgSrc, imgDst, dlg.m_nNewWidth, dlg.m_nNewHieght); break;
+		case 1: IppResizeBilinear(imgSrc, imgDst, dlg.m_nNewWidth, dlg.m_nNewHieght); break;
+		case 2: IppResizeCubic(imgSrc, imgDst, dlg.m_nNewWidth, dlg.m_nNewHieght); break;
+		}
+
+		CONVERT_IMAGE_TO_DIB(imgDst, dib)
+		
+		TCHAR* interpolation[] = { _T("최근방 이웃 보간법"), _T("양선형 보간법"), _T("3차 회선 보간법") };
+		AfxNewBitmap(dib);
+	}
+}
+
+
+void CMyImageToolDoc::OnImageRotate()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CRotateDlg dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		CONVERT_DIB_TO_BYTEIMAGE(m_Dib, imgSrc)
+		IppByteImage imgDst;
+		switch (dlg.m_nRotate)
+		{
+		case 0: IppRotate90(imgSrc, imgDst); break;
+		case 1: IppRotate180(imgSrc, imgDst); break;
+		case 2: IppRotate270(imgSrc, imgDst); break;
+		case 3: IppRotate(imgSrc, imgDst, (double)dlg.m_fAngle); break;
+		}
+
+		CONVERT_IMAGE_TO_DIB(imgDst, dib)
+
+		TCHAR* rotate[] = { _T("90도"), _T("180도"), _T("270도") };
+		AfxNewBitmap(dib);
+	}
+}
+
+
+void CMyImageToolDoc::OnImageMirror()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CONVERT_DIB_TO_BYTEIMAGE(m_Dib, imgSrc)
+	IppByteImage imgDst;
+	IppMirror(imgSrc, imgDst);
+	CONVERT_IMAGE_TO_DIB(imgDst, dib)
+
+	AfxNewBitmap(dib);
+}
+
+
+void CMyImageToolDoc::OnImageFlip()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CONVERT_DIB_TO_BYTEIMAGE(m_Dib, imgSrc)
+	IppByteImage imgDst;
+	IppFlip(imgSrc, imgDst);
+	CONVERT_IMAGE_TO_DIB(imgDst, dib)
+
+	AfxNewBitmap(dib);
 }

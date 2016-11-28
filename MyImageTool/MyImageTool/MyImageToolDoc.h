@@ -57,4 +57,9 @@ public:
 	afx_msg void OnHistoEqualization();
 	afx_msg void OnArithmeticLogical();
 	afx_msg void OnAddNoise();
+	afx_msg void OnImageTranslate();
+	afx_msg void OnImageResize();
+	afx_msg void OnImageRotate();
+	afx_msg void OnImageMirror();
+	afx_msg void OnImageFlip();
 };
